@@ -39,24 +39,21 @@ class _ProfileState extends State<Profile> {
   var avg_review = "";
   Future future;
   Future _future;
-  BeanVerifyOtp userbean;
-  var id = '';
+  var userid = '';
 
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      getProfile(context);
-      kithchenDetail(context);
-      future = getAddressUserAddress(context);
-      _future = getActiveOrder(context);
       Utils.getUser().then((value) {
         setState(() {
-          userbean = value;
-          id = value.data.id;
+          userid = value.data.id;
         });
-
         print('--------------------------------------->    ' + value.data.id);
+        getProfile(context);
+        kithchenDetail(context);
+        future = getAddressUserAddress(context);
+        _future = getActiveOrder(context);
       });
     });
   }
@@ -249,14 +246,18 @@ class _ProfileState extends State<Profile> {
                                             return getUserAddressList(
                                                 result[index]);
                                           },
-                                          itemCount: 2,
+                                          itemCount:
+                                              projectSnap.data.data.length,
                                         );
                                       }
                                     }
                                   }
-                                  return Container(
-                                      child: Center(
-                                          child: CircularProgressIndicator()));
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      child: Text('           No data!'),
+                                    ),
+                                  );
                                 }),
                           ),
                           Padding(
@@ -405,8 +406,7 @@ class _ProfileState extends State<Profile> {
                             }
                           }
                         }
-                        return Container(
-                            child: Center(child: CircularProgressIndicator()));
+                        return Container(child: Text('         No data!'));
                       }),
                   Positioned.fill(
                     child: Align(
@@ -528,7 +528,8 @@ class _ProfileState extends State<Profile> {
   Future<GetProfile> getProfile(BuildContext context) async {
     _progressDialog.show();
     try {
-      FormData from = FormData.fromMap({"user_id": id, "token": "123456789"});
+      FormData from =
+          FormData.fromMap({"user_id": userid, "token": "123456789"});
       GetProfile bean = await ApiProvider().getProfile(from);
       print(bean.data);
       _progressDialog.dismiss();
@@ -537,6 +538,7 @@ class _ProfileState extends State<Profile> {
           username = bean.data[0].username;
           email = bean.data[0].email;
           wallet = bean.data[0].myWallet;
+          number = bean.data[0].mobilenumber;
         });
         return bean;
       } else {
@@ -596,7 +598,7 @@ class _ProfileState extends State<Profile> {
     try {
       FormData from = FormData.fromMap({
         "token": "123456789",
-        "user_id": '77',
+        "user_id": userid,
       });
       GetUserAddress bean = await ApiProvider().getUserAddress(from);
       print(bean.data);
@@ -657,7 +659,7 @@ class _ProfileState extends State<Profile> {
     try {
       FormData from = FormData.fromMap({
         "token": "123456789",
-        "user_id": "15",
+        "user_id": '15',
       });
       order.GetActiveOrder bean = await ApiProvider().getActiveOrder(from);
       print(bean.data);

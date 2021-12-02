@@ -118,7 +118,7 @@ class OrderScreenState extends State<OrderScreen> {
                                         scrollDirection: Axis.vertical,
                                         physics: BouncingScrollPhysics(),
                                         itemBuilder: (context, index) {
-                                          return getItem(result[index],index);
+                                          return getItem(result[index], index);
                                         },
                                         itemCount: result.length,
                                       );
@@ -139,7 +139,7 @@ class OrderScreenState extends State<OrderScreen> {
   Widget getItem(history.Data result, int index) {
     return InkWell(
         onTap: () {
-        getOrderHistoryDetail(result.orderId);
+          getOrderHistoryDetail(result.orderId);
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,9 +157,7 @@ class OrderScreenState extends State<OrderScreen> {
                       )),
                 ),
                 InkWell(
-                  onTap: () {
-
-                  },
+                  onTap: () {},
                   child: Container(
                     margin: EdgeInsets.only(right: 16, top: 10),
                     decoration: BoxDecoration(
@@ -256,67 +254,80 @@ class OrderScreenState extends State<OrderScreen> {
           return StatefulBuilder(builder: (context, setModelState) {
             return Wrap(
               children: [
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text(
-                              "History of order no",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: AppConstant.fontBold,
-                                  fontSize: 18),
-                            ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "History of order no",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: AppConstant.fontBold,
+                                      fontSize: 18),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Image.asset(
+                                  Res.ic_cross,
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                            ],
                           ),
-                          Padding(
-                              padding: EdgeInsets.only(right: 16),
-                              child: Image.asset(
-                                Res.ic_cross,
-                                width: 16,
-                                height: 16,
-                              ))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      data.isEmpty?Center(
-                        child: Text("No History Detil"),
-                      ):ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return getHistory(data[index]);
-                        },
-                        itemCount: data.length,
-                      )
-                      /*FutureBuilder<GetOrderHistory>(
-                          future: future,
-                          builder: (context, projectSnap) {
-                            print(projectSnap);
-                            if (projectSnap.connectionState ==
-                                ConnectionState.done) {
-                              var result;
-                              if (projectSnap.data != null) {
-                                result = projectSnap.data.data;
-                                if (result != null) {
-                                  print(result.length);
-                                  return
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        data.isEmpty
+                            ? Center(
+                                child: Text("No History Detil"),
+                              )
+                            : ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                physics: BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return getHistory(data[index]);
+                                },
+                                itemCount: data.length,
+                              ),
+                        SizedBox(height: 10)
+                        /*FutureBuilder<GetOrderHistory>(
+                            future: future,
+                            builder: (context, projectSnap) {
+                              print(projectSnap);
+                              if (projectSnap.connectionState ==
+                                  ConnectionState.done) {
+                                var result;
+                                if (projectSnap.data != null) {
+                                  result = projectSnap.data.data;
+                                  if (result != null) {
+                                    print(result.length);
+                                    return
+                                  }
                                 }
                               }
-                            }
-                            return Container(
-                                child: Center(
-                                    child: Text("No History Available")
-                                ));
-                          })*/
-                    ],
+                              return Container(
+                                  child: Center(
+                                      child: Text("No History Available")
+                                  ));
+                            })*/
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -333,15 +344,17 @@ class OrderScreenState extends State<OrderScreen> {
           children: [
             Padding(
               padding: EdgeInsets.only(left: 16),
-              child: data.image.isEmpty?Image.asset(
-                Res.ic_poha,
-                width: 50,
-                height: 50,
-              ):Image.network(
-                AppConstant.menuUrl+data.image,
-                width: 50,
-                height: 50,
-              ),
+              child: data.image.isEmpty
+                  ? Image.asset(
+                      Res.ic_poha,
+                      width: 50,
+                      height: 50,
+                    )
+                  : Image.network(
+                      AppConstant.menuUrl + data.image,
+                      width: 50,
+                      height: 50,
+                    ),
             ),
             Expanded(
               child: Column(
@@ -398,9 +411,7 @@ class OrderScreenState extends State<OrderScreen> {
       print(bean.data);
       progressDialog.dismiss();
       if (bean.status == true) {
-        setState(() {
-
-        });
+        setState(() {});
         return bean;
       } else {
         Utils.showToast(bean.message);
@@ -425,13 +436,13 @@ class OrderScreenState extends State<OrderScreen> {
         "order_id": orderId,
       });
       print("param" + from.toString());
-      GetOrderHistoryDetail bean = await ApiProvider().getOrderHistoryDetail(from);
+      GetOrderHistoryDetail bean =
+          await ApiProvider().getOrderHistoryDetail(from);
       print(bean.data);
       progressDialog.dismiss();
       if (bean.status == true) {
         setState(() {
-
-          bottomsheet(context,bean.data);
+          bottomsheet(context, bean.data);
         });
         return bean;
       } else {
