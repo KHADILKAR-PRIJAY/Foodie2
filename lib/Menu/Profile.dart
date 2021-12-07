@@ -65,6 +65,20 @@ class _ProfileState extends State<Profile> {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     return Scaffold(
         backgroundColor: Color(0xffF9F9F9),
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/customerfeedback');
+          },
+          child: Container(
+            margin: EdgeInsets.only(bottom: 16, right: 16),
+            alignment: Alignment.bottomRight,
+            child: Image.asset(
+              Res.ic_chat,
+              width: 60,
+              height: 60,
+            ),
+          ),
+        ),
         drawer: MyDrawers(),
         key: _scaffoldKey,
         body: SingleChildScrollView(
@@ -111,52 +125,56 @@ class _ProfileState extends State<Profile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 56, top: 16),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 90, top: 4, bottom: 4, right: 4),
+                            child: Container(
+                              height: 70,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Image.asset(
-                                    Res.ic_email,
-                                    width: 16,
-                                    height: 16,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        Res.ic_email,
+                                        width: 16,
+                                        height: 16,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        email,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontFamily: AppConstant.fontBold,
+                                            fontSize: 15),
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(
-                                    width: 10,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        Res.ic_phone,
+                                        width: 16,
+                                        height: 16,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontFamily: AppConstant.fontBold,
+                                            fontSize: 15),
+                                      )
+                                    ],
                                   ),
-                                  Text(
-                                    email,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontFamily: AppConstant.fontBold,
-                                        fontSize: 15),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 1, top: 16),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.asset(
-                                    Res.ic_phone,
-                                    width: 16,
-                                    height: 16,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    number,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontFamily: AppConstant.fontBold,
-                                        fontSize: 15),
-                                  )
                                 ],
                               ),
                             ),
@@ -359,10 +377,23 @@ class _ProfileState extends State<Profile> {
                   ),
                   Padding(
                       padding: EdgeInsets.only(top: 80, left: 16),
-                      child: Image.asset(
-                        Res.ic_boy,
-                        width: 80,
-                        height: 80,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            Res.ic_boy,
+                            width: 80,
+                            height: 80,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            username,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       )),
                 ],
               ),
@@ -408,25 +439,25 @@ class _ProfileState extends State<Profile> {
                         }
                         return Container(child: Text('         No data!'));
                       }),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/customerfeedback');
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(bottom: 16, right: 16),
-                          alignment: Alignment.bottomRight,
-                          child: Image.asset(
-                            Res.ic_chat,
-                            width: 60,
-                            height: 60,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
+                  // Positioned.fill(
+                  //   child: Align(
+                  //     alignment: Alignment.bottomRight,
+                  //     child: InkWell(
+                  //       onTap: () {
+                  //         Navigator.pushNamed(context, '/customerfeedback');
+                  //       },
+                  //       child: Container(
+                  //         margin: EdgeInsets.only(bottom: 16, right: 16),
+                  //         alignment: Alignment.bottomRight,
+                  //         child: Image.asset(
+                  //           Res.ic_chat,
+                  //           width: 60,
+                  //           height: 60,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ],

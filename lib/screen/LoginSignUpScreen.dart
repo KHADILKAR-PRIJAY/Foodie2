@@ -695,6 +695,8 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
 
         socailLoginWithFb(profile);
 
+        print('json-----------------profile-----------------------------' +
+            graphResponse.body);
         break;
       case FacebookLoginStatus.cancelledByUser:
         setState(() => _isLoggedIn = false);

@@ -15,7 +15,6 @@ import 'package:food_app/utils/progress_dialog.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class OrderDispatchedScreen extends StatefulWidget {
-
   var lattitude;
   var longtitude;
   var formattedAddress;
@@ -28,16 +27,16 @@ class OrderDispatchedScreen extends StatefulWidget {
 
 class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
   ProgressDialog _progressDialog;
-  var username="";
-  var email="";
-  var kitchenName="";
-  var foodtype="";
-  var address="";
-  var timing="";
-  var open_status="";
-  var total_review="";
-  var avg_review="";
-  var arrivngTime;
+  var username = "";
+  var email = "";
+  var kitchenName = "";
+  var foodtype = "";
+  var address = "";
+  var timing = "";
+  var open_status = "";
+  var total_review = "";
+  var avg_review = "";
+  var arrivngTime = "";
 
   @override
   void initState() {
@@ -51,7 +50,7 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _progressDialog=ProgressDialog(context);
+    _progressDialog = ProgressDialog(context);
     FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     return Scaffold(
@@ -80,8 +79,8 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                   percent: 0.8,
                   center: Container(
                       width: 155,
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(14)),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14)),
                       height: 155,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
@@ -107,7 +106,8 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                                           arrivngTime,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                              color: Colors.black, fontSize: 12),
+                                              color: Colors.black,
+                                              fontSize: 12),
                                         ),
                                       ),
                                     ],
@@ -157,12 +157,12 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                     fontFamily: AppConstant.fontBold),
               )),
               InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.pushNamed(context, '/homebase');
                 },
                 child: Container(
                     color: Colors.white,
-                    margin: EdgeInsets.only(top: 20, right: 16,left: 16),
+                    margin: EdgeInsets.only(top: 20, right: 16, left: 16),
                     child: Column(
                       children: [
                         Row(
@@ -180,7 +180,7 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(left: 16,top: 6),
+                                    padding: EdgeInsets.only(left: 16, top: 6),
                                     child: Text(
                                       username,
                                       textAlign: TextAlign.center,
@@ -191,7 +191,7 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(left: 16,top: 4),
+                                    padding: EdgeInsets.only(left: 16, top: 4),
                                     child: Text(
                                       email,
                                       textAlign: TextAlign.center,
@@ -219,30 +219,47 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 16),
-                          child: Text("John can speak hindi & english He is from nagpur",style: TextStyle(color: Color(0xffA7A8BC),fontSize: 12),),
+                          child: Text(
+                            "John can speak hindi & english He is from nagpur",
+                            style: TextStyle(
+                                color: Color(0xffA7A8BC), fontSize: 12),
+                          ),
                         ),
                         Row(
                           children: [
                             Padding(
                                 padding: EdgeInsets.only(left: 16),
-                                child: Image.asset(Res.ic_check,width: 20,height: 20,)),
+                                child: Image.asset(
+                                  Res.ic_check,
+                                  width: 20,
+                                  height: 20,
+                                )),
                             Padding(
-                              padding: EdgeInsets.only(left: 10,top: 6),
-                              child: Text("Thank you for the tip john!",style: TextStyle(color: Colors.black,fontSize: 12),),
+                              padding: EdgeInsets.only(left: 10, top: 6),
+                              child: Text(
+                                "Thank you for the tip john!",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12),
+                              ),
                             ),
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 10,bottom: 16,top: 6),
-                          child: Text(AppConstant.rupee+"20 will be transferred to him at end of the week",style: TextStyle(color: Color(0xffA7A8BC),fontSize: 12),),
+                          padding:
+                              EdgeInsets.only(left: 10, bottom: 16, top: 6),
+                          child: Text(
+                            AppConstant.rupee +
+                                "20 will be transferred to him at end of the week",
+                            style: TextStyle(
+                                color: Color(0xffA7A8BC), fontSize: 12),
+                          ),
                         ),
                       ],
                     )),
               ),
-
               Container(
                   color: Colors.white,
-                  margin: EdgeInsets.only(top: 20, right: 16,left: 16),
+                  margin: EdgeInsets.only(top: 20, right: 16, left: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -261,7 +278,7 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(left: 16,top: 6),
+                                  padding: EdgeInsets.only(left: 16, top: 6),
                                   child: Text(
                                     kitchenName,
                                     textAlign: TextAlign.center,
@@ -272,7 +289,7 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 16,top: 4),
+                                  padding: EdgeInsets.only(left: 16, top: 4),
                                   child: Text(
                                     timing,
                                     textAlign: TextAlign.center,
@@ -303,11 +320,21 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(left: 16),
-                            child: Text("Today's Launch Menu",style: TextStyle(color: Color(0xffA7A8BC),fontSize: 12),),
+                            child: Text(
+                              "Today's Launch Menu",
+                              style: TextStyle(
+                                  color: Color(0xffA7A8BC), fontSize: 12),
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(right: 16),
-                            child: Text("Customized",style: TextStyle(color: AppConstant.appColor,fontSize: 12,fontFamily: AppConstant.fontBold),),
+                            child: Text(
+                              "Customized",
+                              style: TextStyle(
+                                  color: AppConstant.appColor,
+                                  fontSize: 12,
+                                  fontFamily: AppConstant.fontBold),
+                            ),
                           ),
                         ],
                       ),
@@ -315,10 +342,18 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                         children: [
                           Padding(
                               padding: EdgeInsets.only(left: 16),
-                              child: Image.asset(Res.ic_breakfast,width: 20,height: 20,)),
+                              child: Image.asset(
+                                Res.ic_breakfast,
+                                width: 20,
+                                height: 20,
+                              )),
                           Padding(
-                            padding: EdgeInsets.only(left: 10,top: 6),
-                            child: Text(foodtype,style: TextStyle(color: Colors.black,fontSize: 12),),
+                            padding: EdgeInsets.only(left: 10, top: 6),
+                            child: Text(
+                              foodtype,
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 12),
+                            ),
                           ),
                         ],
                       ),
@@ -326,73 +361,114 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                         color: Color(0xffA7A8BC),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 16,top: 10),
-                        child: Text(username,style: TextStyle(color: Colors.black,fontSize: 15,fontFamily: AppConstant.fontBold),),
+                        padding: EdgeInsets.only(left: 16, top: 10),
+                        child: Text(
+                          username,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontFamily: AppConstant.fontBold),
+                        ),
                       ),
                       Row(
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(left: 16,bottom: 16,top: 10),
-                              child: Image.asset(Res.ic_location,width: 20,height: 20,)),
+                              padding: EdgeInsets.only(
+                                  left: 16, bottom: 16, top: 10),
+                              child: Image.asset(
+                                Res.ic_location,
+                                width: 20,
+                                height: 20,
+                              )),
                           Padding(
-                            padding: EdgeInsets.only(left: 10,top: 10,bottom: 16),
-                            child: Text(address,style: TextStyle(color: Colors.black,fontSize: 12),),
+                            padding:
+                                EdgeInsets.only(left: 10, top: 10, bottom: 16),
+                            child: Text(
+                              address,
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 12),
+                            ),
                           ),
                         ],
                       ),
                     ],
                   )),
-
-
               Container(
                   color: Colors.white,
-                  margin: EdgeInsets.only(top: 20, right: 16,left: 16),
+                  margin: EdgeInsets.only(top: 20, right: 16, left: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10,top: 10,bottom: 16),
-                                  child: Text("Have an issue with your order",style: TextStyle(color: Colors.black,fontSize: 15,fontFamily: AppConstant.fontBold),),
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10, top: 10, bottom: 16),
+                                child: Text(
+                                  "Have an issue with your order",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontFamily: AppConstant.fontBold),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10,top: 10,bottom:6),
-                                  child: Text("Chat with us",style: TextStyle(color: Colors.black,fontSize: 15,fontFamily: AppConstant.fontBold),),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10, top: 10, bottom: 6),
+                                child: Text(
+                                  "Chat with us",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontFamily: AppConstant.fontBold),
                                 ),
-                              ],
-                            )
-                          ),
+                              ),
+                            ],
+                          )),
                           Padding(
-                              padding: EdgeInsets.only(right: 16,bottom: 16,top: 10),
-                              child: Image.asset(Res.ic_order_issue,width: 40,height: 40,)),
-
+                              padding: EdgeInsets.only(
+                                  right: 16, bottom: 16, top: 10),
+                              child: Image.asset(
+                                Res.ic_order_issue,
+                                width: 40,
+                                height: 40,
+                              )),
                         ],
                       ),
-
                     ],
                   )),
-
               Container(
-                width: double.infinity,
+                  width: double.infinity,
                   color: Colors.white,
-                  margin: EdgeInsets.only(top: 20, right: 16,left: 16,bottom: 16),
+                  margin:
+                      EdgeInsets.only(top: 20, right: 16, left: 16, bottom: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 10,top: 10,bottom: 16),
-                        child: Text("Enjoy the NoHung app?",style: TextStyle(color: Colors.black,fontSize: 15,fontFamily: AppConstant.fontBold),),
+                        padding: EdgeInsets.only(left: 10, top: 10, bottom: 16),
+                        child: Text(
+                          "Enjoy the NoHung app?",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontFamily: AppConstant.fontBold),
+                        ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 10,top: 5,bottom:6),
-                        child: Text("Spread the word by rating us on play store.",style: TextStyle(color: Colors.black,fontSize: 13,fontFamily: AppConstant.fontRegular),),
+                        padding: EdgeInsets.only(left: 10, top: 5, bottom: 6),
+                        child: Text(
+                          "Spread the word by rating us on play store.",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 13,
+                              fontFamily: AppConstant.fontRegular),
+                        ),
                       ),
-
                       Center(
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -400,51 +476,56 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
                             Container(
                               height: 40,
                               width: 100,
-                              margin: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 10),
+                              margin: EdgeInsets.only(
+                                  left: 10, right: 10, bottom: 10, top: 10),
                               decoration: BoxDecoration(
-                                color: Color(0xffF3F6FA),
-                                borderRadius: BorderRadius.circular(8)
-                              ),
+                                  color: Color(0xffF3F6FA),
+                                  borderRadius: BorderRadius.circular(8)),
                               child: Center(
-                                child: Text("Not Now",style: TextStyle(color: Colors.black,fontSize: 13),),
+                                child: Text(
+                                  "Not Now",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 13),
+                                ),
                               ),
                             ),
                             Container(
                               height: 40,
                               width: 100,
-                              margin: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 10),
+                              margin: EdgeInsets.only(
+                                  left: 10, right: 10, bottom: 10, top: 10),
                               decoration: BoxDecoration(
                                   color: AppConstant.appColor,
-                                  borderRadius: BorderRadius.circular(8)
-                              ),
+                                  borderRadius: BorderRadius.circular(8)),
                               child: Center(
-                                child: Text("Rating NoHung",style: TextStyle(color: Colors.white,fontSize: 13),),
+                                child: Text(
+                                  "Rating NoHung",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 13),
+                                ),
                               ),
                             )
                           ],
                         ),
                       )
-
                     ],
                   )),
             ],
           ),
         ));
   }
+
   Future<GetProfile> getProfile(BuildContext context) async {
     _progressDialog.show();
     try {
-      FormData from = FormData.fromMap({
-        "user_id": "77",
-        "token": "123456789"
-      });
+      FormData from = FormData.fromMap({"user_id": "77", "token": "123456789"});
       GetProfile bean = await ApiProvider().getProfile(from);
       print(bean.data);
       _progressDialog.dismiss();
       if (bean.status == true) {
         setState(() {
-          username=bean.data[0].username;
-          email=bean.data[0].email;
+          username = bean.data[0].username;
+          email = bean.data[0].email;
         });
         return bean;
       } else {
@@ -459,7 +540,6 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
       _progressDialog.dismiss();
       print(exception);
     }
-
   }
 
   Future<KitchenDetail> kithchenDetail(BuildContext context) async {
@@ -477,19 +557,13 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
       _progressDialog.dismiss();
       if (bean.status == true) {
         setState(() {
-
-
-          kitchenName=bean.data[0].kitchenname;
-          foodtype=bean.data[0].foodtype;
-          address=bean.data[0].address;
-          timing=bean.data[0].timing;
-          open_status=bean.data[0].openStatus;
-          total_review=bean.data[0].totalReview;
-          avg_review=bean.data[0].avgReview.toString();
-
-
-
-
+          kitchenName = bean.data[0].kitchenname;
+          foodtype = bean.data[0].foodtype;
+          address = bean.data[0].address;
+          timing = bean.data[0].timing;
+          open_status = bean.data[0].openStatus;
+          total_review = bean.data[0].totalReview;
+          avg_review = bean.data[0].avgReview.toString();
         });
         return bean;
       } else {
@@ -504,25 +578,21 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
       _progressDialog.dismiss();
       print(exception);
     }
-
-
   }
 
-   getOrderDashboard(BuildContext context) async {
+  getOrderDashboard(BuildContext context) async {
     _progressDialog.show();
     try {
       FormData from = FormData.fromMap({
         "userid": "15",
         "token": "123456789",
-
       });
       GetDashBoard bean = await ApiProvider().getDashboard(from);
       print(bean.data);
       _progressDialog.dismiss();
       if (bean.status == true) {
         setState(() {
-
-          arrivngTime=bean.data[0].arriving.toString();
+          arrivngTime = bean.data[0].arriving.toString();
         });
         return bean;
       } else {
@@ -537,7 +607,5 @@ class OrderDispatchedScreenState extends State<OrderDispatchedScreen> {
       _progressDialog.dismiss();
       print(exception);
     }
-
   }
-
 }

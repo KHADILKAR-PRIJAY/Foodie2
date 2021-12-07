@@ -184,6 +184,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_credit_card">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_credit_card-0.1.4/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_custom_clippers">
           <value>
             <list>
@@ -751,6 +758,7 @@
       <root url="file://$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6/lib" />
       <root url="file://$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flare_loading-2.1.2/lib" />
       <root url="file://$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flare_splash_screen-3.0.2/lib" />
+      <root url="file://$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_credit_card-0.1.4/lib" />
       <root url="file://$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_custom_clippers-1.1.2/lib" />
       <root url="file://$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-2.0.2+1/lib" />
       <root url="file://$USER_HOME$/Flutter2/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_platform_interface-1.0.1/lib" />

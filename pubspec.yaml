@@ -54,6 +54,7 @@ dependencies:
   geolocator: any
   location: any
   flutter_launcher_icons: any
+  flutter_credit_card: ^0.1.4
 
 dev_dependencies:
   flutter_test:

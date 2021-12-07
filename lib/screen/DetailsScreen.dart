@@ -11,6 +11,7 @@ import 'package:food_app/model/GetCartCount.dart';
 import 'package:food_app/model/GetHomeData.dart' as home;
 import 'package:food_app/network/ApiProvider.dart';
 import 'package:food_app/res.dart';
+import 'package:food_app/screen/AddPackageScreen.dart';
 import 'package:food_app/screen/ShippingScreen.dart';
 import 'package:food_app/utils/Constents.dart';
 import 'package:food_app/utils/HttpException.dart';
@@ -40,16 +41,17 @@ class _DetailsScreenState extends State<DetailsScreen>
   var foodtype = "";
   var address = "";
   var timing = "";
-  bool isLike=false;
-  bool isDislike=true;
+  bool isLike = false;
+  bool isDislike = true;
   var open_status = "";
   var total_review = "";
   var avg_review = "";
   List<Offers> offer = [];
   List<Menu> menu = [];
   TabController _controller;
+  ScrollController _Never = ScrollController();
   Future future;
-  var cartCount="";
+  var cartCount = "";
 
   ProgressDialog _progressDialog;
 
@@ -70,6 +72,7 @@ class _DetailsScreenState extends State<DetailsScreen>
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     return Scaffold(
       body: NestedScrollView(
+        controller: _Never,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
@@ -79,27 +82,34 @@ class _DetailsScreenState extends State<DetailsScreen>
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
                   children: [
-                    Image.network(widget.result.image, width: double.infinity, fit: BoxFit.cover),
+                    Image.network(widget.result.image,
+                        width: double.infinity, fit: BoxFit.cover),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                            padding: EdgeInsets.only(left: 16, top: 26),
-                            child: Image.asset(
-                              Res.ic_back,
-                              color: Colors.white,
-                              width: 16,
-                              height: 16,
-                            )),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.only(left: 16, top: 26),
+                              child: Image.asset(
+                                Res.ic_back,
+                                color: Colors.white,
+                                width: 16,
+                                height: 16,
+                              )),
+                        ),
                         InkWell(
                           onTap: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ShippingScreen(address)));
-
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ShippingScreen(address)));
                           },
                           child: Container(
-                            height: 30,
+                            height: 45,
                             margin: EdgeInsets.only(top: 36),
                             decoration: BoxDecoration(
                                 color: AppConstant.appColor,
@@ -113,8 +123,8 @@ class _DetailsScreenState extends State<DetailsScreen>
                                   padding: EdgeInsets.only(left: 16, right: 6),
                                   child: Image.asset(
                                     Res.ic_bascket,
-                                    width: 16,
-                                    height: 16,
+                                    width: 20,
+                                    height: 20,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -152,14 +162,12 @@ class _DetailsScreenState extends State<DetailsScreen>
                                   height: 10,
                                 ),
                               ),
-
                               Stack(
                                 children: [
                                   Visibility(
                                     visible: isDislike,
                                     child: InkWell(
-                                      onTap: (){
-
+                                      onTap: () {
                                         addFavKitchen();
                                       },
                                       child: Padding(
@@ -174,12 +182,12 @@ class _DetailsScreenState extends State<DetailsScreen>
                                   Visibility(
                                     visible: isLike,
                                     child: InkWell(
-                                      onTap: (){
-
+                                      onTap: () {
                                         removeFav();
                                       },
                                       child: Padding(
-                                          padding: EdgeInsets.only(top: 1,right: 16),
+                                          padding: EdgeInsets.only(
+                                              top: 1, right: 16),
                                           child: Image.asset(
                                             Res.ic_hearfille,
                                             width: 30,
@@ -201,8 +209,9 @@ class _DetailsScreenState extends State<DetailsScreen>
             ),
           ];
         },
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: ListView(
+          controller: _Never,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsets.only(left: 16, top: 16),
@@ -537,6 +546,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                 ],
               ),
             ),
+            SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.only(left: 16, top: 6),
               child: Text(
@@ -547,59 +557,91 @@ class _DetailsScreenState extends State<DetailsScreen>
                     fontFamily: AppConstant.fontBold),
               ),
             ),
-            Expanded(
-              child: menu.isEmpty
-                  ? Container()
-                  : ListView.builder(
+            SizedBox(height: 10),
+            // Expanded(
+            //   child: menu.isEmpty
+            //       ? Container()
+            //       : ListView.builder(
+            //           shrinkWrap: true,
+            //           scrollDirection: Axis.vertical,
+            //           physics: BouncingScrollPhysics(),
+            //           itemBuilder: (context, index) {
+            //             return getBreakfast(menu[index]);
+            //           },
+            //           itemCount: menu.length,
+            //         ),
+            // ),
+            Container(
+              height: 50,
+              color: Colors.white,
+              child: TabBar(
+                labelPadding: EdgeInsets.only(right: 4, left: 0),
+                labelStyle:
+                    TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                indicator: UnderlineTabIndicator(
+                    borderSide:
+                        BorderSide(width: 2.0, color: AppConstant.appColor),
+                    insets: EdgeInsets.all(-1)),
+                controller: _controller,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                tabs: [
+                  Tab(
+                    text: 'Breakfast',
+                  ),
+                  Tab(
+                    text: 'Lunch',
+                  ),
+                  Tab(
+                    text: 'Dinner ',
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 500,
+              child: TabBarView(
+                controller: _controller,
+                children: <Widget>[
+                  Expanded(
+                    child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
+                      itemCount: menu.length,
+                      // controller: _Never,
+                      //physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return getBreakfast(menu[index]);
                       },
-                      itemCount: menu.length,
                     ),
-            ),
-
-            /*   Flexible(
-              child: Container(
-                child: TabBarView(
-                  controller: _controller,
-                  children: <Widget>[
-
-                    Column(
-                      children: [
-                        Flexible(
-                          child: InkWell(
-                            onTap:(){
-
-                              Navigator.pushNamed(context, '/addpackage');
-                              },
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) {
-                                return getLunch();
-                              },
-                              itemCount: 10,
-                            ),
-                          ),
-                        ),],
-                    ),
-
-                    ListView.builder(
+                  ),
+                  Expanded(
+                    child: ListView.builder(
                       shrinkWrap: true,
+                      // controller: _Never,
                       scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
+                      // physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return getBreakfast();
+                        return getLunch();
                       },
                       itemCount: 10,
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      // controller: _Never,
+                      shrinkWrap: true,
+                      // physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return getLunch();
+                      },
+                      itemCount: 10,
+                    ),
+                  ),
+                ],
               ),
-            ),*/
+            ),
           ],
         ),
       ),
@@ -616,7 +658,7 @@ class _DetailsScreenState extends State<DetailsScreen>
           border: Border.all(color: AppConstant.appColor)),
       child: Center(
         child: Text(
-          offer.discount.toString() + "%off " + offer.offercode,
+          offer.discount.toString() + "% " + offer.offercode,
           style: TextStyle(fontSize: 13),
         ),
       ),
@@ -626,78 +668,71 @@ class _DetailsScreenState extends State<DetailsScreen>
   Widget getBreakfast(Menu menu) {
     return Padding(
       padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-      child: Column(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Padding(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              child: Image.asset(
+                Res.ic_idle,
+                width: 60,
+                height: 60,
+              )),
+          Expanded(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16),
-                  child: Image.asset(
-                    Res.ic_idle,
-                    width: 60,
-                    height: 60,
-                  )),
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(left: 2),
-                      child: Text(
-                        menu.itemname,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: AppConstant.fontBold,
-                            fontSize: 16),
-                      )),
-                  Text(
-                    menu.cuisinetype,
-                    style: TextStyle(color: Color(0xffA7A8BC)),
-                  ),
-                  Text(
-                    "₹" + menu.itemprice,
-                    style: TextStyle(color: Color(0xff7EDABF)),
-                  ),
-                  RatingBarIndicator(
-                    rating: 4,
-                    itemCount: 5,
-                    itemSize: 16.0,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                  ),
-                ],
-              )),
-              /* Container(
-                margin: EdgeInsets.only(right: 16),
-                decoration: BoxDecoration(
-                    border: Border.all(color: AppConstant.appColor),
-                    borderRadius: BorderRadius.circular(100)),
-                height: 30,
-                width: 70,
-                child: Center(
+                  padding: EdgeInsets.only(left: 2),
                   child: Text(
-                    "Add+",
-                    style: TextStyle(color: AppConstant.appColor, fontSize: 13),
-                  ),
+                    menu.itemname,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: AppConstant.fontBold,
+                        fontSize: 16),
+                  )),
+              Text(
+                menu.cuisinetype,
+                style: TextStyle(color: Color(0xffA7A8BC)),
+              ),
+              Text(
+                "₹" + menu.itemprice,
+                style: TextStyle(color: Color(0xff7EDABF)),
+              ),
+              RatingBarIndicator(
+                rating: 4,
+                itemCount: 5,
+                itemSize: 16.0,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
                 ),
-              ),*/
+              ),
             ],
+          )),
+          Container(
+            margin: EdgeInsets.only(right: 16),
+            decoration: BoxDecoration(
+                border: Border.all(color: AppConstant.appColor),
+                borderRadius: BorderRadius.circular(100)),
+            height: 30,
+            width: 70,
+            child: Center(
+              child: Text(
+                "Add+",
+                style: TextStyle(color: AppConstant.appColor, fontSize: 13),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-/*
-
   Widget getLunch() {
-    return  Padding(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+    return Padding(
+      padding: EdgeInsets.only(left: 10, right: 10, top: 12, bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -713,7 +748,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                   )),
               Expanded(
                 child: Padding(
-                    padding: EdgeInsets.only(left: 6,top: 10),
+                    padding: EdgeInsets.only(left: 6, top: 10),
                     child: Text(
                       "Package 1",
                       style: TextStyle(
@@ -726,41 +761,62 @@ class _DetailsScreenState extends State<DetailsScreen>
                 "₹3,000",
                 style: TextStyle(color: Color(0xff7EDABF)),
               ),
-
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10,top: 6),
+            padding: EdgeInsets.only(left: 10, top: 6),
             child: Text(
               "South indian",
-              style: TextStyle(color: Color(0xffA7A8BC),fontSize: 13,fontFamily: AppConstant.fontRegular),
+              style: TextStyle(
+                  color: Color(0xffA7A8BC),
+                  fontSize: 13,
+                  fontFamily: AppConstant.fontRegular),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10,top: 5),
+            padding: EdgeInsets.only(left: 10, top: 5),
             child: Text(
               "Including Saturday, Sunday",
-              style: TextStyle(color: Color(0xffA7A8BC),fontSize: 13,fontFamily: AppConstant.fontRegular),
+              style: TextStyle(
+                  color: Color(0xffA7A8BC),
+                  fontSize: 13,
+                  fontFamily: AppConstant.fontRegular),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: RatingBarIndicator(
-              rating: 4,
-              itemCount: 5,
-              itemSize: 16.0,
-              physics: BouncingScrollPhysics(),
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.amber,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: RatingBarIndicator(
+                  rating: 4,
+                  itemCount: 5,
+                  itemSize: 16.0,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                ),
               ),
-            ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddPackageScreen()));
+                },
+                child: Text(
+                  'View Details',
+                  style: TextStyle(color: AppConstant.appColor, fontSize: 12),
+                ),
+              )
+            ],
           ),
         ],
       ),
     );
   }
-*/
 
   Future<KitchenDetail> kithchenDetail(BuildContext context) async {
     _progressDialog.show();
@@ -768,8 +824,20 @@ class _DetailsScreenState extends State<DetailsScreen>
       FormData from = FormData.fromMap({
         "kitchenid": "2",
         "token": "123456789",
-        "meal_plan": isSelect == 1 ? "weekly" : isSelect == 2 ? "monthly" : isSelect == 3 ? "trial" : "weekly",
-        "meal_type": isSelectFood == 1 ? "0" : isSelectFood == 2 ? "1" : isSelectFood == 2 ? "2" : "",
+        "meal_plan": isSelect == 1
+            ? "weekly"
+            : isSelect == 2
+                ? "monthly"
+                : isSelect == 3
+                    ? "trial"
+                    : "weekly",
+        "meal_type": isSelectFood == 1
+            ? "0"
+            : isSelectFood == 2
+                ? "1"
+                : isSelectFood == 2
+                    ? "2"
+                    : "",
         "meal_for": "1"
       });
       print(from);
@@ -811,25 +879,20 @@ class _DetailsScreenState extends State<DetailsScreen>
   void addFavKitchen() async {
     _progressDialog.show();
     try {
-      FormData from = FormData.fromMap({
-        "userid": "70",
-        "token": "123456789",
-        "kitchenid": "3"
-      });
+      FormData from = FormData.fromMap(
+          {"userid": "70", "token": "123456789", "kitchenid": "3"});
       BeanFavKitchen bean = await ApiProvider().favKitchen(from);
       print(bean.data);
       _progressDialog.dismiss();
       if (bean.status == true) {
         setState(() {
           Utils.showToast(bean.message);
-          isDislike=false;
-          isLike=true;
+          isDislike = false;
+          isLike = true;
         });
-
       } else {
         Utils.showToast(bean.message);
       }
-
     } on HttpException catch (exception) {
       _progressDialog.dismiss();
       print(exception);
@@ -837,31 +900,25 @@ class _DetailsScreenState extends State<DetailsScreen>
       _progressDialog.dismiss();
       print(exception);
     }
-
   }
 
   void removeFav() async {
     _progressDialog.show();
     try {
-      FormData from = FormData.fromMap({
-        "userid": "70",
-        "token": "123456789",
-        "kitchenid": "3"
-      });
+      FormData from = FormData.fromMap(
+          {"userid": "70", "token": "123456789", "kitchenid": "3"});
       BeanRemoveKitchen bean = await ApiProvider().removeKitchen(from);
       print(bean.data);
       _progressDialog.dismiss();
       if (bean.status == true) {
         setState(() {
           Utils.showToast(bean.message);
-          isDislike=true;
-          isLike=false;
+          isDislike = true;
+          isLike = false;
         });
-
       } else {
         Utils.showToast(bean.message);
       }
-
     } on HttpException catch (exception) {
       _progressDialog.dismiss();
       print(exception);
@@ -869,17 +926,14 @@ class _DetailsScreenState extends State<DetailsScreen>
       _progressDialog.dismiss();
       print(exception);
     }
-
-
   }
 
-   getCartCount(BuildContext context) async {
+  getCartCount(BuildContext context) async {
     _progressDialog.show();
     try {
       FormData from = FormData.fromMap({
         "user_id": "15",
         "token": "123456789",
-
       });
       print(from);
       GetCartCount bean = await ApiProvider().getCartCount(from);
@@ -887,8 +941,7 @@ class _DetailsScreenState extends State<DetailsScreen>
       _progressDialog.dismiss();
       if (bean.status == true) {
         setState(() {
-          cartCount=bean.data.cartCount.toString();
-
+          cartCount = bean.data.cartCount.toString();
         });
         return bean;
       } else {
@@ -903,7 +956,5 @@ class _DetailsScreenState extends State<DetailsScreen>
       _progressDialog.dismiss();
       print(exception);
     }
-
   }
-
 }

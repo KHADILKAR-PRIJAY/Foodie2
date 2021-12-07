@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:food_app/res.dart';
 import 'package:food_app/utils/Constents.dart';
 
+import 'SelectDateTime.dart';
+
 class AddPackageScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => AddPackageScreenState();
@@ -14,139 +16,167 @@ class AddPackageScreenState extends State<AddPackageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-        body: SafeArea(
-      child: SingleChildScrollView(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
-        children: [
-          SizedBox(
-            height: 16,
-          ),
-          Row(
             children: [
               SizedBox(
-                width: 16,
-              ),
-              Image.asset(
-                Res.ic_back,
-                width: 16,
                 height: 16,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 16),
-                child: Text(
-                  "Package 1",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: AppConstant.fontBold,
-                      fontSize: 16),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 16),
-                child: Text(
-                  "Lunch",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: AppConstant.fontBold,
-                      fontSize: 16),
-                ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 16,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      Res.ic_back,
+                      width: 16,
+                      height: 16,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: Text(
+                      "Package 1",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: AppConstant.fontBold,
+                          fontSize: 16),
+                    ),
+                  )
+                ],
               ),
               SizedBox(
-                width: 16,
+                height: 40,
               ),
-              Image.asset(
-                Res.ic_veg,
-                width: 16,
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: Text(
+                      "Lunch",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: AppConstant.fontBold,
+                          fontSize: 16),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Image.asset(
+                    Res.ic_veg,
+                    width: 16,
+                    height: 16,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: Text(
+                      "Veg",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: AppConstant.fontBold,
+                          fontSize: 16),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: Text(
+                      "North indian meals",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: AppConstant.fontBold,
+                          fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
                 height: 16,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 16),
-                child: Text(
-                  "Veg",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: AppConstant.fontBold,
-                      fontSize: 16),
-                ),
+              Divider(
+                color: Colors.grey,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return addPackage();
+                },
+                itemCount: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 16),
-                child: Text(
-                  "North indian meals",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: AppConstant.fontBold,
-                      fontSize: 16),
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SelectDateTime()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(13)),
+                    width: double.infinity,
+                    height: 70,
+                    margin: EdgeInsets.only(left: 16, right: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          child: Text(
+                            "₹300",
+                            style: TextStyle(color: Color(0xff7EDABF)),
+                          ),
+                          padding: EdgeInsets.only(top: 16, left: 16),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                child: Text(
+                                  "Order for a week",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                padding: EdgeInsets.only(top: 6, left: 16),
+                              ),
+                            ),
+                            Padding(
+                              child: Text(
+                                "Add to basket",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              padding:
+                                  EdgeInsets.only(top: 6, left: 16, bottom: 10),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(right: 16),
+                                child: Image.asset(
+                                  Res.ic_next_arrow,
+                                  width: 16,
+                                  height: 16,
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
-          SizedBox(
-            height: 16,
-          ),
-          Divider(
-            color: Colors.grey,
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return addPackage();
-            },
-            itemCount: 10,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(13)
-            ),
-            width: double.infinity,
-            height: 70,
-            margin: EdgeInsets.only(left: 16,right: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  child: Text("₹300",style: TextStyle(color: Color(0xff7EDABF)),),
-                  padding: EdgeInsets.only(top: 16,left: 16),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        child: Text("Order for a week",style: TextStyle(color: Colors.white),),
-                        padding: EdgeInsets.only(top: 6,left: 16),
-                      ),
-                    ),
-                    Padding(
-                      child: Text("Add to basket",style: TextStyle(color: Colors.white),),
-                      padding: EdgeInsets.only(top: 6,left: 16,bottom: 10),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-
-                      padding: EdgeInsets.only(right: 16),
-                        child: Image.asset(Res.ic_next_arrow,width: 16,height: 16,)),
-
-                  ],
-                )
-
-              ],
-            ),
-          ),
-        ],
-      )),
-    ));
+        ),
+      ),
+    );
   }
 
   Widget addPackage() {
@@ -173,9 +203,12 @@ class AddPackageScreenState extends State<AddPackageScreen> {
                 onTap: () {
                   bottomsheet(context);
                 },
-                child: Text(
-                  "Customizable",
-                  style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 6, top: 10),
+                  child: Text(
+                    "Customizable",
+                    style: TextStyle(color: Colors.black, fontSize: 14),
+                  ),
                 ),
               ),
             ],
@@ -196,64 +229,83 @@ class AddPackageScreenState extends State<AddPackageScreen> {
   }
 
   void bottomsheet(BuildContext context) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-          // <-- for border radius
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15.0),
-            topRight: Radius.circular(15.0),
-          ),
+    showModalBottomSheet<dynamic>(
+      shape: RoundedRectangleBorder(
+        // <-- for border radius
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15.0),
+          topRight: Radius.circular(15.0),
         ),
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(builder: (context, setModelState) {
-            return Wrap(
-              children: [
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text(
-                              "Select for below option",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontFamily: AppConstant.fontBold,
-                                  fontSize: 18),
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(right: 16),
-                              child: Image.asset(
-                                Res.ic_cross,
-                                width: 16,
-                                height: 16,
-                              ))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return getTitle(item[index]);
-                        },
-                        itemCount: item.length,
-                      ),
-                    ],
+      ),
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            shrinkWrap: true,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            //mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "Select for below option",
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: AppConstant.fontBold,
+                          fontSize: 18),
+                    ),
                   ),
-                )
-              ],
-            );
-          });
-        });
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                        padding: EdgeInsets.only(right: 16),
+                        child: Image.asset(
+                          Res.ic_cross,
+                          width: 16,
+                          height: 16,
+                        )),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return getTitle(item[index]);
+                },
+                itemCount: item.length,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  child: Text('Done'),
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   getTitle(ITEM item) {
@@ -273,11 +325,11 @@ class AddPackageScreenState extends State<AddPackageScreen> {
         ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
+          itemCount: food.length,
           physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return getSubCategory(food[index], index);
           },
-          itemCount: food.length,
         ),
       ],
     );
@@ -292,7 +344,6 @@ class AddPackageScreenState extends State<AddPackageScreen> {
               checkColor: Colors.white, // color of tick Mark
               activeColor: AppConstant.lightGreen, // c
               onChanged: (value) {
-
                 setState(() {
                   food.isCheckbox = value;
                   print(food.isCheckbox);
@@ -324,9 +375,8 @@ class AddPackageScreenState extends State<AddPackageScreen> {
               borderRadius: BorderRadius.circular(100)),
           child: Row(
             children: [
-
               Padding(
-                  child: Text(
+                child: Text(
                   "-",
                   style: TextStyle(color: Colors.white),
                 ),
@@ -390,4 +440,5 @@ class FOOD {
 List<FOOD> food = <FOOD>[
   FOOD(title: 'Mutter Paneer', isCheckbox: false),
   FOOD(title: 'Bhindi', isCheckbox: false),
+  FOOD(title: 'Aaloo paratha', isCheckbox: false),
 ];
