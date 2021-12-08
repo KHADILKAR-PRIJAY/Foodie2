@@ -35,7 +35,7 @@ dependencies:
   shared_preferences: any
   logging: any
   dio: any
-  rxdart: any
+
   fluttertoast: any
   flutter_spinkit: any
   firebase_auth: ^0.18.2
@@ -55,6 +55,9 @@ dependencies:
   location: any
   flutter_launcher_icons: any
   flutter_credit_card: ^0.1.4
+  scrollable_clean_calendar: ^0.3.0
+
+
 
 dev_dependencies:
   flutter_test:

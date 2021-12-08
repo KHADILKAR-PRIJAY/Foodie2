@@ -427,34 +427,35 @@ class _ShippingScreenState extends State<ShippingScreen> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(context, '/payment');
                     },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(13)),
-                      child: Center(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "ADD PAYMENT DETAILS",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Image.asset(
-                              Res.ic_next_arrow,
-                              width: 17,
-                              height: 17,
-                            )
-                          ],
+                    child: Material(
+                      elevation: 7,
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(13),
+                      child: Container(
+                        height: 50,
+                        child: Center(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "ADD PAYMENT DETAILS",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Image.asset(
+                                Res.ic_next_arrow,
+                                width: 17,
+                                height: 17,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
